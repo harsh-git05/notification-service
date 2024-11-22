@@ -1,0 +1,235 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Notification Service API",
+    "description": "API for managing email, portal, and web notifications"
+  },
+  "host": "localhost:3500",
+  "basePath": "/",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Notifications",
+      "description": "Operations related to notifications"
+    }
+  ],
+  "paths": {
+    "/api/v1/notification/email": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Create email notification",
+        "description": "Create a new email notification and send it.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "recipient": {
+                  "type": "string",
+                  "example": "recipient@example.com"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "This is your email notification."
+                }
+              },
+              "required": ["type", "recipient", "message"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Notification created and email sent."
+          },
+          "500": {
+            "description": "Failed to create notification."
+          }
+        }
+      }
+    },
+    "/api/v1/notification/email_list": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Fetch email notifications",
+        "description": "Get a list of all email notifications.",
+        "responses": {
+          "200": {
+            "description": "List of email notifications.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Notification"
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch notifications."
+          }
+        }
+      }
+    },
+    "/api/v1/notification/portal": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Create portal notification",
+        "description": "Create a new portal notification.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "portal"
+                },
+                "recipient": {
+                  "type": "string",
+                  "example": "recipient@example.com"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "This is your portal notification."
+                }
+              },
+              "required": ["type", "recipient", "message"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Notification created."
+          },
+          "500": {
+            "description": "Failed to create notification."
+          }
+        }
+      }
+    },
+    "/api/v1/notification/portal_list": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Fetch portal notifications",
+        "description": "Get a list of all portal notifications.",
+        "responses": {
+          "200": {
+            "description": "List of portal notifications.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Notification"
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch notifications."
+          }
+        }
+      }
+    },
+    "/api/v1/notification/web": {
+      "post": {
+        "tags": ["Notifications"],
+        "summary": "Create web notification",
+        "description": "Create a new web notification.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "web"
+                },
+                "recipient": {
+                  "type": "string",
+                  "example": "recipient@example.com"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "This is your web notification."
+                }
+              },
+              "required": ["type", "recipient", "message"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Notification created."
+          },
+          "500": {
+            "description": "Failed to create notification."
+          }
+        }
+      }
+    },
+    "/api/v1/notification/web_list": {
+      "get": {
+        "tags": ["Notifications"],
+        "summary": "Fetch web notifications",
+        "description": "Get a list of all web notifications.",
+        "responses": {
+          "200": {
+            "description": "List of web notifications.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Notification"
+              }
+            }
+          },
+          "500": {
+            "description": "Failed to fetch notifications."
+          }
+        }
+      }
+    }
+  
+  },
+  "definitions": {
+    "Notification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 1
+        },
+        "type": {
+          "type": "string",
+          "example": "email"
+        },
+        "recipient": {
+          "type": "string",
+          "example": "recipient@example.com"
+        },
+        "message": {
+          "type": "string",
+          "example": "This is your notification message."
+        },
+        "status": {
+          "type": "string",
+          "example": "sent"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2024-11-19T00:00:00Z"
+        }
+      }
+    }
+  }
+}
